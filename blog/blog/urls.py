@@ -16,15 +16,29 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/auth/", include("user_auth.urls")),
+    path("api/blog/", include("content.urls")),
 ]
 
 if settings.DEBUG:
+    from rest_framework.documentation import include_docs_urls
+    from rest_framework.schemas import get_schema_view
     from django.conf.urls.static import static
 
+    urlpatterns += [
+        path("docs/", include_docs_urls(title="Blog Schema")),
+        path(
+            "api_schema/",
+            get_schema_view(
+                title="Farm Application Schema", description="API schema for Backend"
+            ),
+            name="api-schema",
+        ),
+    ]
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
