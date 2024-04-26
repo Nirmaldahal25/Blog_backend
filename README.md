@@ -9,5 +9,6 @@ Introducing a vibrant platform where users can unleash their creativity through 
 ## How to run this program
 The application is only configured for development phase. Run the following commands in order.
 1. Install all the requirements in the requirements from the requirements.txt file. `pip install -r requirements.txt`
-2. `python blog/manage.py migrate`
-3. `python blog/manage.py runserver`
+2. Change the current directory to blog ie. `cd blog`
+2. `python manage.py migrate`
+3. `python manage.py runserver`
