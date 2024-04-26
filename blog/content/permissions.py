@@ -7,6 +7,6 @@ class BlogPostPermissions(BasePermission):
         return bool(
             request.method not in SAFE_METHODS
             and request.user
-            and request.user.authenticated
+            and request.user.is_authenticated
             and obj.user == request.user
         )
