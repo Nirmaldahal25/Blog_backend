@@ -4,9 +4,6 @@ from content.models import BlogPost
 
 class BlogPostPermissions(BasePermission):
     def has_object_permission(self, request, view, obj):
-        return bool(
-            request.method not in SAFE_METHODS
-            and request.user
-            and request.user.is_authenticated
-            and obj.user == request.user
+        return request.method in SAFE_METHODS or (
+            request.user and request.user.is_authenticated and obj.user == request.user
         )
